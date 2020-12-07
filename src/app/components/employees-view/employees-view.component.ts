@@ -13,7 +13,7 @@ export class EmployeesViewComponent implements OnInit{
 
   employee = new Employee();
   employees : Employee[] = [];
-  displayedColumns: string[] = ['id', 'name', 'lastName', 'username', 'email', 'phoneNumber'];
+  displayedColumns: string[] = ['id', 'name', 'lastName', 'username', 'email', 'phoneNumber', 'actions'];
   
   constructor(private _employeeService : EmployeeService){
   }
