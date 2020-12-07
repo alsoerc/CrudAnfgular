@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatSnackBar, MatTableDataSource } from '@angular/material';
 import { Employee } from 'src/app/models/Employee';
 import { EmployeeService } from 'src/app/services/employee.service';
 
@@ -12,13 +12,15 @@ export class EmployeesViewComponent implements OnInit{
   
 
   employee = new Employee();
+  employeeToEdit = new Employee();
   employees : Employee[] = [];
   displayedColumns: string[] = ['id', 'name', 'lastName', 'username', 'email', 'phoneNumber', 'actions'];
+  dataSource;
   
-  constructor(private _employeeService : EmployeeService){
+  
+  constructor(private _employeeService : EmployeeService, private _snackBar: MatSnackBar){
   }
   
-  dataSource;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
@@ -26,11 +28,24 @@ export class EmployeesViewComponent implements OnInit{
     this.getEmployees();
   }
 
-  onSubmit(){
-    this.getEmployees();
-    alert(this.employee.name + this.employee.lastName + this.employee.username + this.employee.email + this.employee.phoneNumber)
-    this.resetForm();
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 3000,
+    });
   }
+
+  onSubmit(){
+    this._employeeService.insertRecord(this.employee).subscribe(
+      success =>{
+        this.openSnackBar('Agregado con éxito', 'Cerrar');
+        this.getEmployees();
+        this.resetForm();
+      },
+      err=>{
+        this.openSnackBar('Error al registrar', 'Cerrar');
+      }
+    )
+}
 
   getEmployees(){
     this._employeeService.getRecords().subscribe(
@@ -45,15 +60,49 @@ export class EmployeesViewComponent implements OnInit{
       }
     )
   }
+
+  getOneEmployee(id: number){
+    this.employeeToEdit.id = id;
+    this._employeeService.getOneRecord(this.employeeToEdit.id).subscribe(
+      success => {
+        this.employeeToEdit = success;
+        this.openSnackBar(this.employeeToEdit.name, 'Cerrar');
+      },
+      err =>{
+        console.log(err)
+        alert('Error!!')
+      }
+    )
+  }
+
+  deleteOneRecord(id: number){
+    if(confirm('Confirmar eliminación de registro ' )){
+      this.deleteRecord(id)
+    }
+  }
   
+  deleteRecord(id: number){
+    this._employeeService.deleteRecord(id).subscribe(
+      success =>{
+        this.openSnackBar('Eliminado con éxito', 'Cerrar');
+        this.getEmployees();
+      },
+      err => {
+        this.openSnackBar('Error al eliminar', 'Cerrar');
+      }
+    )
+  }
+
 
   resetForm(){
+    this.employee.id = 0;
     this.employee.name = '' ;
     this.employee.lastName = '' ;
     this.employee.username = '' ;
     this.employee.email = '' ;
     this.employee.phoneNumber = '' ;
   }
+
 
 
 

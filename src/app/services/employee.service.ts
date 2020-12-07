@@ -19,7 +19,7 @@ export class EmployeeService {
   }
 
   insertRecord(employee : Employee){
-    this._employeeService.post<Employee>(this.url + 'employees', employee);
+    return this._employeeService.post<Employee>(this.url + 'employees', employee);
   }
 
   updateRecord(employee : Employee , id: number){
@@ -28,6 +28,10 @@ export class EmployeeService {
 
   deleteRecord(id: number){
     return this._employeeService.delete(this.url + 'employees/' + id);
+  }
+
+  getOneRecord(id: number){
+    return this._employeeService.get<Employee>(this.url + 'employees/' +id);
   }
 
 
