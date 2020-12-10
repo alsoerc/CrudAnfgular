@@ -11,6 +11,7 @@ import { LoginComponent } from './components/login/login.component';
 import { HeaderComponent } from './components/header/header.component';
 import { EmployeesViewComponent } from './components/employees-view/employees-view.component';
 import { DepartmentViewComponent } from './components/department-view/department-view.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,9 @@ import { DepartmentViewComponent } from './components/department-view/department
     LoginComponent,
     HeaderComponent,
     EmployeesViewComponent,
-    DepartmentViewComponent
+    DepartmentViewComponent,
+    ConfirmDialogComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -29,6 +32,7 @@ import { DepartmentViewComponent } from './components/department-view/department
     HttpClientModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[ConfirmDialogComponent]
 })
 export class AppModule { }

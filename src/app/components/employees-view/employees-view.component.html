@@ -86,10 +86,15 @@
                 <ng-container matColumnDef="actions">
                     <th mat-header-cell *matHeaderCellDef> Acciones </th>
                     <td mat-cell *matCellDef="let employee" style="justify-content: space-around; display: flex;">
-                        <button mat-raised-button color="accent" (click)="getOneEmployee(employee.id)">
+                        <!-- <button mat-raised-button color="accent" (click)="getOneEmployee(employee.id)">
                             <mat-icon>edit</mat-icon>
                             Editar
+                        </button> -->
+                        <button mat-raised-button color="accent" (click)="openDialog(employee.id)">
+                            <mat-icon>edit</mat-icon>
+                            actualizar
                         </button>
+
                         <button mat-raised-button color="warn" (click)="deleteOneRecord(employee.id)">
                             <mat-icon>delete</mat-icon>
                             Eliminar

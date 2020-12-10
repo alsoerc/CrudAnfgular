@@ -1,7 +1,8 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSnackBar, MatTableDataSource } from '@angular/material';
+import { MatDialog, MatDialogConfig, MatPaginator, MatSnackBar, MatTableDataSource } from '@angular/material';
 import { Employee } from 'src/app/models/Employee';
 import { EmployeeService } from 'src/app/services/employee.service';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-employees-view',
@@ -18,7 +19,7 @@ export class EmployeesViewComponent implements OnInit{
   dataSource;
   
   
-  constructor(private _employeeService : EmployeeService, private _snackBar: MatSnackBar){
+  constructor(private _employeeService : EmployeeService, private _snackBar: MatSnackBar,private dialogo: MatDialog){
   }
   
 
@@ -61,18 +62,23 @@ export class EmployeesViewComponent implements OnInit{
     )
   }
 
-  getOneEmployee(id: number){
-    this.employeeToEdit.id = id;
-    this._employeeService.getOneRecord(this.employeeToEdit.id).subscribe(
-      success => {
-        this.employeeToEdit = success;
-        this.openSnackBar(this.employeeToEdit.name, 'Cerrar');
-      },
-      err =>{
-        console.log(err)
-        alert('Error!!')
-      }
+  openDialog(id:number){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    dialogConfig.data = {
+      id: id
+    }
+
+    this.dialogo.open(ConfirmDialogComponent, dialogConfig);
+
+    const dialogRef = this.dialogo.open(ConfirmDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+      data => this.getEmployees()
     )
+
   }
 
   deleteOneRecord(id: number){
