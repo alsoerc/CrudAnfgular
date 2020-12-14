@@ -68,6 +68,7 @@ export class EmployeesViewComponent implements OnInit{
     dialogConfig.autoFocus = true;
 
     dialogConfig.data = {
+      catalog : 1,
       id: id
     }
 

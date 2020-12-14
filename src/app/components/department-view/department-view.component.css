@@ -1,0 +1,30 @@
+.form-card{
+    border:solid 2px lightblue;
+}
+.records-view{
+    border: solid 2px rgb(136, 122, 0);
+}
+.records-view table{
+    margin-top: 2rem;
+}
+
+button{
+    width: 100%;
+    color: aliceblue;
+}
+.example-full-width {
+    width: 100%;
+}
+
+mat-label{
+    color: rgb(255, 255, 255);
+    font-size: 1rem;
+}
+
+input{
+    font-size: 1.2rem;
+}
+
+form button{
+    font-size: 1.1rem;
+}

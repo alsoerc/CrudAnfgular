@@ -8,6 +8,8 @@ import { Global } from './globsl';
 })
 export class EmployeeService {
 
+  public logged:boolean = false;
+
   private url : string;
 
   constructor(private _employeeService: HttpClient) {
@@ -34,5 +36,13 @@ export class EmployeeService {
     return this._employeeService.get<Employee>(this.url + 'employees/' +id);
   }
 
+  login(){
+    if(this.logged){
+      return true;
+  }else{
+      return false;
+  }
+
+  }
 
 }

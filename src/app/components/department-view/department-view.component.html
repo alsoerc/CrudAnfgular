@@ -1,1 +1,73 @@
-<p>department-view works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3 form-card">
+            <mat-card>
+                <mat-card-header>
+                    <h4>Registro de departamentos</h4>
+                </mat-card-header>
+                <mat-card-content>
+                    <form class="" (ngSubmit)="onSubmit()">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Nombre</mat-label>
+                            <input matInput type="text" placeholder="I+D" name="name" [(ngModel)]="department.name">
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Descripción</mat-label>
+                            <input matInput type="text" placeholder="Departamento de TI" name="description" [(ngModel)]="department.description">
+                        </mat-form-field>
+
+                        <button mat-raised-button color="primary" type="submit">Registrar</button>
+                    </form>
+                </mat-card-content>
+            </mat-card>
+
+        </div>
+        <div class="col-9">
+            <h4>Lista de departamentos</h4>
+            <table mat-table [dataSource]="dataSource" style="width: 100%;">
+                <!-- Id Column -->
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef> Id </th>
+                    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                </ng-container>
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                </ng-container>
+
+                <!-- Description Column -->
+                <ng-container matColumnDef="description">
+                    <th mat-header-cell *matHeaderCellDef> Descripción </th>
+                    <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+                </ng-container>
+
+                <!-- Options Column -->
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                    <td mat-cell *matCellDef="let employee" style="justify-content: space-around; display: flex;">
+                        <!-- <button mat-raised-button color="accent" (click)="getOneEmployee(employee.id)">
+                            <mat-icon>edit</mat-icon>
+                            Editar
+                        </button> -->
+                        <button mat-raised-button color="accent" (click)="openDialog(employee.id)">
+                            <mat-icon>edit</mat-icon>
+                            Editar
+                        </button>
+
+                        <button mat-raised-button color="warn" (click)="deleteOneRecord(employee.id)">
+                            <mat-icon>delete</mat-icon>
+                            Eliminar
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[4, 8, 12]" showFirstLastButtons></mat-paginator>
+        </div>
+    </div>
+</div>

@@ -12,6 +12,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { EmployeesViewComponent } from './components/employees-view/employees-view.component';
 import { DepartmentViewComponent } from './components/department-view/department-view.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { AuthGuard } from './services/AuthGuard';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent],
   entryComponents:[ConfirmDialogComponent]
 })

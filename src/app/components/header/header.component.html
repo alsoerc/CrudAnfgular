@@ -1,5 +1,5 @@
 <nav  class="navbar navbar-dark  navbar-expand-lg  navbar-fixed-top"
-    style="background-color: #424242;" *ngIf="isLogged">
+    style="background-color: #424242;" *ngIf="isLoggedIn()">
     <a class="navbar-brand" href="#">
         <img src="../../../assets/aczino.ico" width="65" height="40" class="d-inline-block align-top" alt="">
     </a>
@@ -10,7 +10,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" [routerLink]="['']">Salir</a>
+                <a class="nav-link" (click)="logOut()">Salir</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" [routerLink]="['/employees']">Empleados</a>

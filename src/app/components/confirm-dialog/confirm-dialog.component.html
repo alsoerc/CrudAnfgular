@@ -3,7 +3,25 @@
     <p>Identificador : {{id}}</p>
 
     <form action="">
-        <mat-form-field>
+        <!--Form for departments--->
+        <mat-form-field *ngIf="catalog == 2">
+            <mat-label>Nombre</mat-label>
+            <input matInput
+                type = "text"
+                name = "name"
+                [(ngModel)]="department.name"/>
+        </mat-form-field>   
+        <br>
+        <mat-form-field *ngIf="catalog == 2">
+            <mat-label>Descripción</mat-label>
+            <input matInput
+                type = "text"
+                name = "description"
+                [(ngModel)]="department.description"/>
+        </mat-form-field>   
+        <br>
+
+        <mat-form-field *ngIf="catalog == 1">
             <mat-label>Nombre</mat-label>
             <input matInput
                 type = "text"
@@ -12,7 +30,9 @@
                 ngModel="">
         </mat-form-field>
         <br>
-        <mat-form-field>
+    
+        <!--Form for employees--->
+        <mat-form-field *ngIf="catalog==1">
             <mat-label>Apellidos</mat-label>
             <input matInput
                 type = "text"
@@ -21,7 +41,7 @@
                 ngModel="">
         </mat-form-field>
         <br>
-        <mat-form-field>
+        <mat-form-field *ngIf="catalog==1">
             <mat-label>Nombre de usuario</mat-label>
             <input matInput
                 type = "text"
@@ -30,7 +50,7 @@
                 ngModel="">
         </mat-form-field>
         <br>
-        <mat-form-field>
+        <mat-form-field *ngIf="catalog==1">
             <mat-label>Correo electrónico</mat-label>
             <input matInput
                 type = "email"
@@ -39,7 +59,7 @@
                 ngModel="">
         </mat-form-field>
         <br>
-        <mat-form-field>
+        <mat-form-field *ngIf="catalog==1">
             <mat-label>Teléfono</mat-label>
             <input matInput
                 type = "tel"
